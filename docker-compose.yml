@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  order:
+    container_name: order_service_container
+    build: ./order_service
+    restart: always
+    ports:
+      - "79:79"
+    volumes:
+      - ./admin_service/media/payment_invoice:/code/app/payment_invoice
+    env_file:
+      .env
+
+  recommendation:
+    container_name: recommendation_service_container
+    build: ./recommendation_service
+    restart: on-failure
+    ports:
+      - "81:81"
+    volumes:
+      - ./recommendation_service/data.json:/code/app/data.json
+    env_file:
+      .env
+    depends_on:
+      - search
+
+  cms:
+    container_name: cms_service_container
+    build: ./cms_service
+    restart: always
+    ports:
+      - "82:82"
+    env_file:
+      .env
+
+  admin:
+    container_name: admin_service_container
+    build: ./admin_service
+    restart: always
+    ports:
+      - "83:83"
+    volumes:
+      - ./admin_service/static:/static
+      - ./admin_service/media:/media
+      - ./admin_service/logs:/logs
+    env_file:
+      .env
+
+  search:
+    container_name: search_service_container
+    build: ./search_service
+    restart: on-failure
+    ports:
+      - "84:84"
+    env_file:
+      .env
+
+  go-api:
+    container_name: golang_api_container
+    build: ./golang_backend
+    command:
+      - ./main
+    ports:
+      - "8080:8080"
+    restart: always
+    volumes:
+      - ./golang_backend/.env:/usr/src/app/.env
+
+  frontend:
+    container_name: frontend_service_container
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      ./frontend/.env.production
+
+  nginx:
+    build: ./deploy/nginx
+    container_name: nginx_container
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - ./deploy/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./deploy/nginx/default:/etc/nginx/sites-available/default
+      - ./deploy/nginx/default:/etc/nginx/sites-enabled/default
+      - ./deploy/nginx/certs:/etc/nginx/certs
+      - ./deploy/nginx/logs:/var/log/nginx
+      - ./deploy/nginx/main:/etc/nginx/templates
+      - ./admin_service/static:/admin_service/static
+      - ./admin_service/media:/admin_service/media
+    depends_on:
+      - frontend
+      - go-api
+      - cms
+      - search
+      - recommendation
+      - order
+      - admin

@@ -1,0 +1,23 @@
+{% load static %}
+
+<img src="{{ widget.value.url }}" alt="Image" style="max-height: 200px;"/>
+
+<input type="hidden" name="{{ widget.name }}" value="{{ widget.value.url }}"/>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var input = document.querySelector('input[name={{ widget.name }}]');
+        var img = input.previousSibling;
+        input.addEventListener('change', function() {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.addEventListener('load', function() {
+                img.src = reader.result;
+                input.value = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>

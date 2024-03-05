@@ -1,0 +1,1986 @@
+basePath: /
+definitions:
+  dto.CDEKDelivery:
+    properties:
+      pick_up_point_address:
+        description: TODO continue logic
+        type: string
+    type: object
+  dto.CDEKDeliveryInfo:
+    properties:
+      description:
+        type: string
+    type: object
+  dto.CanToSendEmail:
+    properties:
+      can_to_send_news:
+        type: boolean
+      can_to_send_personal_offers:
+        type: boolean
+    type: object
+  dto.Cart:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/dto.CartProduct'
+        type: array
+      total_price:
+        type: string
+    type: object
+  dto.CartProduct:
+    properties:
+      count:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      price:
+        type: string
+      quantity:
+        type: string
+      title:
+        type: string
+      total_price:
+        type: string
+    type: object
+  dto.Category:
+    properties:
+      id:
+        type: string
+      image:
+        type: string
+      sub_categories:
+        items:
+          $ref: '#/definitions/dto.SubCategory'
+        type: array
+      title:
+        type: string
+    type: object
+  dto.CategorySwagger:
+    properties:
+      id:
+        type: string
+      image:
+        type: string
+      sub_categories:
+        items:
+          $ref: '#/definitions/dto.SubCategory'
+        type: array
+      title:
+        type: string
+    type: object
+  dto.Characteristic:
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      value:
+        type: string
+    type: object
+  dto.CodeGenerate:
+    properties:
+      phone:
+        type: string
+    required:
+    - phone
+    type: object
+  dto.CodeResponse:
+    properties:
+      code:
+        type: string
+    type: object
+  dto.Comparison:
+    properties:
+      category_id:
+        type: string
+      category_title:
+        type: string
+      characteristic:
+        items:
+          $ref: '#/definitions/dto.Param'
+        type: array
+      products:
+        items:
+          $ref: '#/definitions/dto.ComparisonProduct'
+        type: array
+    type: object
+  dto.ComparisonProduct:
+    properties:
+      base_unit:
+        type: string
+      count:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      price:
+        type: string
+      quantity:
+        type: string
+      rating:
+        type: string
+      title:
+        type: string
+      total_reviews:
+        type: string
+    type: object
+  dto.Coordinates:
+    properties:
+      x:
+        type: string
+      "y":
+        type: string
+    type: object
+  dto.Count:
+    properties:
+      count:
+        type: string
+    required:
+    - count
+    type: object
+  dto.CountResponse:
+    properties:
+      count: {}
+      data: {}
+    type: object
+  dto.CourierDelivery:
+    properties:
+      address:
+        type: string
+      apartment_office:
+        type: string
+      entrance:
+        type: string
+      floor:
+        type: string
+      index:
+        type: string
+      intercom:
+        type: string
+      note:
+        type: string
+    type: object
+  dto.CourierDeliveryInfo:
+    properties:
+      description:
+        type: string
+      time:
+        $ref: '#/definitions/dto.CourierDeliveryTimeInfo'
+    type: object
+  dto.CourierDeliveryTimeInfo:
+    properties:
+      fri:
+        type: string
+      mon:
+        type: string
+      sat:
+        type: string
+      sun:
+        type: string
+      thu:
+        type: string
+      tue:
+        type: string
+      wen:
+        type: string
+    type: object
+  dto.DefaultData:
+    properties:
+      data: {}
+    type: object
+  dto.DeleteCart:
+    properties:
+      product_id:
+        type: string
+    required:
+    - product_id
+    type: object
+  dto.DeleteComparison:
+    properties:
+      product_id:
+        type: string
+    required:
+    - product_id
+    type: object
+  dto.DeleteComparisonByCategory:
+    properties:
+      category_id:
+        type: string
+    required:
+    - category_id
+    type: object
+  dto.DeleteFavourite:
+    properties:
+      product_id:
+        type: string
+    required:
+    - product_id
+    type: object
+  dto.DeliveryType:
+    properties:
+      cdek_delivery:
+        $ref: '#/definitions/dto.CDEKDelivery'
+      courier_delivery:
+        $ref: '#/definitions/dto.CourierDelivery'
+      self_delivery:
+        $ref: '#/definitions/dto.SelfDelivery'
+    type: object
+  dto.DeliveryTypeInfo:
+    properties:
+      can_delivery:
+        type: boolean
+      description:
+        type: string
+      icon:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  dto.Favourite:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/dto.FavouriteProduct'
+        type: array
+    type: object
+  dto.FavouriteProduct:
+    properties:
+      id:
+        type: string
+      image:
+        type: string
+      price:
+        type: string
+      quantity:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.GetOrder:
+    properties:
+      canceled:
+        type: boolean
+      created_at:
+        type: string
+      id:
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/dto.OrderProduct'
+        type: array
+      status:
+        type: string
+      total_price:
+        type: string
+    type: object
+  dto.GetReview:
+    properties:
+      body:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      image:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      rating:
+        type: string
+    type: object
+  dto.Order:
+    properties:
+      delivery_type:
+        $ref: '#/definitions/dto.DeliveryType'
+      payment_method_id:
+        type: integer
+      promo_code:
+        type: string
+    required:
+    - delivery_type
+    - payment_method_id
+    type: object
+  dto.OrderProduct:
+    properties:
+      id:
+        type: string
+      image:
+        type: string
+      price:
+        type: string
+      quantity:
+        type: string
+      title:
+        type: string
+      total_price:
+        type: string
+    type: object
+  dto.Param:
+    properties:
+      param:
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/dto.ProductValue'
+        type: array
+    type: object
+  dto.PaymentMethod:
+    properties:
+      description:
+        type: string
+      icon:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.PickUpPoint:
+    properties:
+      address:
+        type: string
+      coordinates:
+        $ref: '#/definitions/dto.Coordinates'
+      email_1:
+        type: string
+      email_2:
+        type: string
+      id:
+        type: string
+      phone_1:
+        type: string
+      phone_2:
+        type: string
+      phone_3:
+        type: string
+      stock:
+        $ref: '#/definitions/dto.PickUpPointStockTitle'
+      time:
+        $ref: '#/definitions/dto.PickUpPointTime'
+    type: object
+  dto.PickUpPointStockDescription:
+    properties:
+      description:
+        type: string
+    type: object
+  dto.PickUpPointStockTitle:
+    properties:
+      description:
+        items:
+          $ref: '#/definitions/dto.PickUpPointStockDescription'
+        type: array
+      title:
+        type: string
+    type: object
+  dto.PickUpPointTime:
+    properties:
+      fri:
+        type: string
+      mon:
+        type: string
+      sat:
+        type: string
+      sun:
+        type: string
+      thu:
+        type: string
+      tue:
+        type: string
+      wen:
+        type: string
+    type: object
+  dto.PrivacyPolicy:
+    properties:
+      body:
+        type: string
+    type: object
+  dto.Product:
+    properties:
+      base_unit:
+        type: string
+      count:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      price:
+        type: string
+      quantity:
+        type: string
+      rating:
+        type: string
+      review_count:
+        type: string
+      title:
+        type: string
+      vendor_code:
+        type: string
+    type: object
+  dto.ProductFiles:
+    properties:
+      document:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.ProductInformation:
+    properties:
+      base_unit:
+        type: string
+      category:
+        $ref: '#/definitions/dto.Category'
+      characteristics:
+        items:
+          $ref: '#/definitions/dto.Characteristic'
+        type: array
+      count:
+        type: string
+      description:
+        type: string
+      files:
+        items:
+          $ref: '#/definitions/dto.ProductFiles'
+        type: array
+      id:
+        type: string
+      image:
+        type: string
+      price:
+        type: string
+      quantity:
+        type: string
+      rating:
+        type: string
+      title:
+        type: string
+      vendor_code:
+        type: string
+    type: object
+  dto.ProductStatistic:
+    properties:
+      rating:
+        type: string
+      recommendation:
+        type: string
+      review_count:
+        type: string
+      reviews:
+        items:
+          $ref: '#/definitions/dto.GetReview'
+        type: array
+      sales_count:
+        type: string
+      stars_statistic:
+        $ref: '#/definitions/dto.Stars'
+    type: object
+  dto.ProductValue:
+    properties:
+      product_id:
+        type: string
+      value:
+        type: string
+    type: object
+  dto.Receipt:
+    properties:
+      cart_price:
+        type: string
+      delivery_price:
+        type: string
+      final_price:
+        type: string
+      products_count:
+        type: string
+      sale:
+        type: string
+    type: object
+  dto.RegisterUser:
+    properties:
+      code:
+        type: string
+      company_address:
+        type: string
+      company_name:
+        type: string
+      inn:
+        type: string
+      kpp:
+        type: string
+      manager_name:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      surname:
+        type: string
+    required:
+    - code
+    - phone
+    type: object
+  dto.RequestCall:
+    properties:
+      email:
+        type: string
+      manager_name:
+        type: string
+      message:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  dto.RequestVacancy:
+    properties:
+      comment:
+        type: string
+      email:
+        type: string
+      last_name:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      surname:
+        type: string
+      vacancy_id:
+        type: string
+    type: object
+  dto.Requisites:
+    properties:
+      body:
+        type: string
+    type: object
+  dto.ReturnOrder:
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+    type: object
+  dto.Review:
+    properties:
+      body:
+        type: string
+      image:
+        items:
+          type: string
+        type: array
+      product_id:
+        type: string
+      rating:
+        type: string
+      recommend:
+        type: boolean
+    required:
+    - body
+    - product_id
+    - rating
+    type: object
+  dto.SelfDelivery:
+    properties:
+      pick_up_points_id:
+        type: integer
+    type: object
+  dto.SiteReview:
+    properties:
+      comment:
+        type: string
+      rating:
+        type: integer
+    required:
+    - comment
+    - rating
+    type: object
+  dto.SortParams:
+    properties:
+      max_price:
+        type: string
+    type: object
+  dto.Stars:
+    properties:
+      star_1:
+        type: string
+      star_2:
+        type: string
+      star_3:
+        type: string
+      star_4:
+        type: string
+      star_5:
+        type: string
+    type: object
+  dto.SubCategory:
+    properties:
+      id:
+        type: string
+      image:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.Token:
+    properties:
+      token:
+        type: string
+    type: object
+  dto.UpdateCart:
+    properties:
+      count:
+        type: string
+      product_id:
+        type: string
+    required:
+    - count
+    - product_id
+    type: object
+  dto.UpdateComparison:
+    properties:
+      product_id:
+        type: string
+    required:
+    - product_id
+    type: object
+  dto.UpdateEmail:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
+  dto.UpdateFavourite:
+    properties:
+      product_id:
+        type: string
+    required:
+    - product_id
+    type: object
+  dto.UpdateManagerName:
+    properties:
+      manager_name:
+        type: string
+    required:
+    - manager_name
+    type: object
+  dto.UserAuth:
+    properties:
+      code:
+        type: string
+      phone:
+        type: string
+    required:
+    - code
+    - phone
+    type: object
+  dto.UserData:
+    properties:
+      can_to_send_news:
+        type: boolean
+      can_to_send_personal_offers:
+        type: boolean
+      company_address:
+        type: string
+      company_name:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      inn:
+        type: string
+      kpp:
+        type: string
+      manager_name:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      surname:
+        type: string
+    type: object
+  dto.UserOrdersProducts:
+    properties:
+      count:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      quantity:
+        type: string
+      rating:
+        type: string
+      title:
+        type: string
+      total_price:
+        type: string
+    type: object
+  dto.Vacancy:
+    properties:
+      email:
+        type: string
+      first_phone:
+        type: string
+      id:
+        type: string
+      second_phone:
+        type: string
+      title:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: adamstradvers@gmail.com
+    name: API Creator
+    url: https://t.me/amirich18
+  description: API Server for Ufaelectrto market
+  title: Ufaelectrto API
+  version: "1.3"
+paths:
+  /api/code-auth:
+    post:
+      consumes:
+      - application/json
+      description: Send user code for authentication
+      operationId: generate_auth_phone_code
+      parameters:
+      - description: user info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CodeGenerate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.CodeResponse'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Auth generate sms-code
+      tags:
+      - auth
+  /api/code-reg:
+    post:
+      consumes:
+      - application/json
+      description: Send user code for registration
+      operationId: generate_reg_phone_code
+      parameters:
+      - description: user info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CodeGenerate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.CodeResponse'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Reg generate sms-code
+      tags:
+      - auth
+  /api/payment_validator:
+    post:
+      responses: {}
+      summary: Validate online payment
+      tags:
+      - Order
+  /api/site-review:
+    post:
+      consumes:
+      - application/json
+      description: User review about site
+      parameters:
+      - description: review info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SiteReview'
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Site review
+      tags:
+      - user
+  /api/v1/auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user
+      operationId: authenticate-account
+      parameters:
+      - description: account info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserAuth'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Token'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Sign-in
+      tags:
+      - auth
+  /api/v1/auth/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: Register user
+      operationId: create-account
+      parameters:
+      - description: account info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Token'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Sign-up
+      tags:
+      - auth
+  /api/v1/cart:
+    get:
+      description: Get actual user cart
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.Cart'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: User cart
+      tags:
+      - cart
+  /api/v1/cart/add:
+    post:
+      consumes:
+      - application/json
+      description: Update actual user cart
+      parameters:
+      - description: product info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateCart'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Update user cart
+      tags:
+      - cart
+  /api/v1/cart/clear:
+    post:
+      description: Clear user cart
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Clear user cart
+      tags:
+      - cart
+  /api/v1/cart/del:
+    post:
+      consumes:
+      - application/json
+      description: Delete product from actual user cart
+      parameters:
+      - description: product info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeleteCart'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete product from cart
+      tags:
+      - cart
+  /api/v1/categories:
+    get:
+      consumes:
+      - application/json
+      description: Get all categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.CategorySwagger'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All categories
+      tags:
+      - categories
+  /api/v1/category_detail:
+    get:
+      consumes:
+      - application/json
+      description: Get category layer by id
+      parameters:
+      - description: ID of the required category
+        in: query
+        name: cat_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CategorySwagger'
+        "400":
+          description: Error
+          schema:
+            items: {}
+            type: array
+        "404":
+          description: Error
+          schema:
+            items: {}
+            type: array
+      summary: Category layer by id
+      tags:
+      - categories
+  /api/v1/cms/cdek_info:
+    get:
+      description: Full CDEK delivery info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.CDEKDeliveryInfo'
+              type: object
+      summary: CDEK delivery info
+      tags:
+      - cms
+  /api/v1/cms/courier_info:
+    get:
+      description: Full courier delivery info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.CourierDeliveryInfo'
+              type: object
+      summary: Courier delivery info
+      tags:
+      - cms
+  /api/v1/cms/privacy_policy:
+    get:
+      description: Get privacy policy
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.PrivacyPolicy'
+              type: object
+      summary: Get privacy policy
+      tags:
+      - cms
+  /api/v1/cms/request_call:
+    post:
+      consumes:
+      - application/json
+      description: Request call back
+      parameters:
+      - description: request call back info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RequestCall'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Request call back
+      tags:
+      - cms
+  /api/v1/cms/requisites:
+    get:
+      description: Get requisites
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.Requisites'
+              type: object
+      summary: Get requisites
+      tags:
+      - cms
+  /api/v1/cms/vacancies:
+    get:
+      description: All vacancies info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.Vacancy'
+                  type: array
+              type: object
+      summary: Vacancies info
+      tags:
+      - cms
+  /api/v1/cms/vacancy_request:
+    post:
+      consumes:
+      - application/json
+      description: Request vacancy
+      parameters:
+      - description: request vacancy info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RequestVacancy'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Request vacancy
+      tags:
+      - cms
+  /api/v1/comparison:
+    get:
+      description: Get actual user comparison list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.CountResponse'
+            - properties:
+                count:
+                  $ref: '#/definitions/dto.Count'
+                data:
+                  items:
+                    $ref: '#/definitions/dto.Comparison'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: User comparison list
+      tags:
+      - comparison
+  /api/v1/comparison/add:
+    post:
+      consumes:
+      - application/json
+      description: Update actual user comparison list
+      parameters:
+      - description: product info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateComparison'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Update user comparison list
+      tags:
+      - comparison
+  /api/v1/comparison/clear:
+    get:
+      description: Clear user comparison list
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Clear user comparison list
+      tags:
+      - comparison
+  /api/v1/comparison/del:
+    post:
+      consumes:
+      - application/json
+      description: Delete product from actual user comparison list
+      parameters:
+      - description: product info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeleteComparison'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete product from comparison list
+      tags:
+      - comparison
+  /api/v1/comparison/del_cat:
+    post:
+      consumes:
+      - application/json
+      description: Delete products from actual user comparison list by category
+      parameters:
+      - description: category info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeleteComparisonByCategory'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete products from comparison list by category
+      tags:
+      - comparison
+  /api/v1/favourite:
+    get:
+      description: Get actual user favourite list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.Favourite'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: User favourite list
+      tags:
+      - favourite
+  /api/v1/favourite/add:
+    post:
+      consumes:
+      - application/json
+      description: Update actual user favourite list
+      parameters:
+      - description: product info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateFavourite'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Update user favourite list
+      tags:
+      - favourite
+  /api/v1/favourite/clear:
+    post:
+      description: Clear user favourite list
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Clear user favourite list
+      tags:
+      - favourite
+  /api/v1/favourite/del:
+    post:
+      consumes:
+      - application/json
+      description: Delete product from actual user favourite list
+      parameters:
+      - description: product info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeleteFavourite'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete product from favourite list
+      tags:
+      - favourite
+  /api/v1/order:
+    get:
+      consumes:
+      - application/json
+      description: Get all user orders
+      parameters:
+      - description: Orders limit in response
+        in: query
+        name: limit
+        type: string
+      - description: Response page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.CountResponse'
+            - properties:
+                count:
+                  $ref: '#/definitions/dto.Count'
+                data:
+                  items:
+                    $ref: '#/definitions/dto.GetOrder'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get user orders
+      tags:
+      - Order
+    post:
+      consumes:
+      - application/json
+      description: Create order user order
+      parameters:
+      - description: order info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Order'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ReturnOrder'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Create order
+      tags:
+      - Order
+  /api/v1/order/cancel:
+    post:
+      consumes:
+      - application/json
+      description: Cancel user order
+      parameters:
+      - description: Order id
+        in: query
+        name: order_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Cancel order
+      tags:
+      - Order
+  /api/v1/order/delivery_types:
+    get:
+      description: Get all delivery type
+      produces:
+      - application/json
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.DeliveryTypeInfo'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All delivery type
+      tags:
+      - Order
+  /api/v1/order/payment_methods:
+    get:
+      description: Get all payments methods
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.PaymentMethod'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get payments methods
+      tags:
+      - Order
+  /api/v1/order/pick_up_points:
+    get:
+      description: Get all pick up points
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.PickUpPoint'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get pick up points
+      tags:
+      - Order
+  /api/v1/order/receipt:
+    post:
+      description: Get order receipt
+      parameters:
+      - description: promo code
+        in: query
+        name: promo_code
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.Receipt'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get receipt
+      tags:
+      - Order
+  /api/v1/order_products:
+    get:
+      consumes:
+      - application/json
+      description: Get all user products
+      parameters:
+      - description: Orders limit in response
+        in: query
+        name: limit
+        type: string
+      - description: Response page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.CountResponse'
+            - properties:
+                count:
+                  $ref: '#/definitions/dto.Count'
+                data:
+                  items:
+                    $ref: '#/definitions/dto.UserOrdersProducts'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get user products
+      tags:
+      - Order
+  /api/v1/product_detail:
+    get:
+      consumes:
+      - application/json
+      description: Get product detail with related products
+      parameters:
+      - description: Product ID
+        in: query
+        name: prod_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ProductInformation'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Product detail
+      tags:
+      - products
+  /api/v1/products:
+    get:
+      consumes:
+      - application/json
+      description: Get all products
+      parameters:
+      - description: Product limit in response
+        in: query
+        name: limit
+        type: string
+      - description: Response page
+        in: query
+        name: page
+        type: string
+      - description: Category uuid
+        in: query
+        name: cat_id
+        type: string
+      - description: Minimal products price
+        in: query
+        name: price_min
+        type: string
+      - description: Maximum products price
+        in: query
+        name: price_max
+        type: string
+      - description: Minimal products rating
+        in: query
+        name: rating_min
+        type: string
+      - description: Maximum products rating
+        in: query
+        name: rating_max
+        type: string
+      - description: Products uuid
+        in: query
+        name: prod_id
+        type: string
+      - description: 'Sort settings: popular/lower_price/higher_price/news/discounts/default'
+        in: query
+        name: sort
+        type: string
+      - description: Is quantity are > 0
+        in: query
+        name: not_empty
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.CountResponse'
+            - properties:
+                count:
+                  $ref: '#/definitions/dto.Count'
+                data:
+                  items:
+                    $ref: '#/definitions/dto.Product'
+                  type: array
+                sort_params:
+                  $ref: '#/definitions/dto.SortParams'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All products
+      tags:
+      - products
+  /api/v1/products/review:
+    post:
+      consumes:
+      - application/json
+      description: Create product review
+      parameters:
+      - description: review info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Review'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Create product review
+      tags:
+      - products
+  /api/v1/products/reviews:
+    get:
+      consumes:
+      - application/json
+      description: Get all product reviews
+      parameters:
+      - description: Product ID
+        in: query
+        name: prod_id
+        required: true
+        type: string
+      - description: Reviews limit in response
+        in: query
+        name: limit
+        type: string
+      - description: Response page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ProductStatistic'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get product reviews
+      tags:
+      - products
+  /api/v1/user/info:
+    get:
+      description: All user data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.DefaultData'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.UserData'
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: User info
+      tags:
+      - user
+  /api/v1/user/update_email:
+    post:
+      consumes:
+      - application/json
+      description: Update user email info
+      parameters:
+      - description: email info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateEmail'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: User email info
+      tags:
+      - user
+  /api/v1/user/update_email_sender:
+    post:
+      consumes:
+      - application/json
+      description: Update email sender params
+      parameters:
+      - description: email params info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CanToSendEmail'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Update email sender params
+      tags:
+      - user
+  /api/v1/user/update_manager_name:
+    post:
+      consumes:
+      - application/json
+      description: Update user manager name
+      parameters:
+      - description: manager name info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateManagerName'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Update manager name
+      tags:
+      - user
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

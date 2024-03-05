@@ -1,0 +1,233 @@
+server {
+    listen 80;
+    server_name ufaelectro.ru;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 80;
+    server_name admin.ufaelectro.ru;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 80;
+    server_name cms.ufaelectro.ru;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 80;
+    server_name search.ufaelectro.ru;
+    return 301  https://$server_name$request_uri;
+}
+
+server {
+    listen 80;
+    server_name dev.ufaelectro.ru;
+    return 301  https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name dev.ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    location / {
+        return 503;
+    }
+
+    location /img/ {
+         root /etc/nginx/templates;
+    }
+
+    location /img/favicon/ {
+        root /etc/nginx/templates;
+    }
+
+    error_page 500 502 503 504 /index.html;
+
+    location = /index.html {
+        root /etc/nginx/templates;
+    }
+
+    location /data/ {
+        root /home/gumaonelove/besm;
+        expires 30d;
+        client_max_body_size 50M;
+    }
+
+    location /media/ {
+        root /home/gumaonelove/besm/python_backend;
+        expires 30d;
+        client_max_body_size 50M;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    location /api/ {
+        proxy_pass http://go-api:8080;
+        proxy_set_header Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_max_body_size 50M;
+    }
+
+    location / {
+        proxy_pass http://frontend:3000;
+        proxy_set_header Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_max_body_size 50M;
+    }
+
+    location /media/ {
+        root /admin_service/;
+        expires 30d;
+        client_max_body_size 50M;
+    }
+
+    location /static/ {
+        root /admin_service/;
+        expires 30d;
+        client_max_body_size 50M;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name search.ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    location / {
+        proxy_pass http://search:84;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name cms.ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    location / {
+        proxy_pass http://cms:82;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name admin.ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    if ($scheme != "https") {
+        return 301 https://$server_name$request_uri;
+    }
+
+    location / {
+        proxy_pass http://admin:83;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /media/ {
+        root /admin_service/;
+        expires 30d;
+        client_max_body_size 50M;
+    }
+
+    location /static/ {
+        root /admin_service/;
+        expires 30d;
+        client_max_body_size 50M;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name order.ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    location / {
+        proxy_pass http://order:79;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/certs/ufaelectro.ru.crt;
+    ssl_certificate_key /etc/nginx/certs/ufaelectro.ru.key;
+    server_name rec.ufaelectro.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    location / {
+        proxy_pass http://recommendation:81;
+    }
+}
